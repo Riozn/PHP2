@@ -20,13 +20,13 @@ class invoiceDetail extends Model
         // Relación con la tabla 'orders'
         public function order()
         {
-            return $this->belongsTo(Order::class, 'OrdenID');
+            return $this->belongsTo(Order::class);
         }
     
         // Relación con la tabla 'dishes'
         public function dish()
         {
-            return $this->belongsTo(Dish::class, 'PlatoID');
+            return $this->belongsTo(Dish::class);
         }
     
     

@@ -16,6 +16,8 @@ return new class extends Migration
             $table->string('Nombre',50)->notNull();;
             $table->string('Descripcion',200)->notNull();;
             $table->decimal('Precio',10,2)->notNull();
+            $table->string('Imagen')->nullable();
+            $table->boolean('Activo')->default(true);
             $table->timestamps();
 
 
@@ -29,5 +31,6 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('dishes');
+        $table->dropColumn('Imagen');
     }
 };

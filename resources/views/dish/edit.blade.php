@@ -1,29 +1,46 @@
-@extends('layouts.app')
-
-@section('content')
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Editar Plato</title>
+</head>
+<body>
     <h1>Editar Plato</h1>
 
-    <!-- Formulario para editar el plato -->
-    <form method="POST" action="{{ route('dish.update', $dish->id) }}">
+    <form method="POST" action="{{ route('dish.update', $dish->id) }}" enctype="multipart/form-data">
         @csrf
         @method('PUT')
-        <div class="form-group">
+
+        <div>
             <label for="Nombre">Nombre:</label>
-            <input type="text" name="Nombre" class="form-control" value="{{ $dish->Nombre }}" required>
+            <input type="text" name="Nombre" id="Nombre" value="{{ $dish->Nombre }}" required>
         </div>
 
-        <div class="form-group">
+        <div>
             <label for="Descripcion">Descripción:</label>
-            <textarea name="Descripcion" class="form-control" required>{{ $dish->Descripcion }}</textarea>
+            <textarea name="Descripcion" id="Descripcion" required>{{ $dish->Descripcion }}</textarea>
         </div>
 
-        <div class="form-group">
+        <div>
             <label for="Precio">Precio:</label>
-            <input type="number" name="Precio" class="form-control" value="{{ $dish->Precio }}" required>
+            <input type="number" name="Precio" id="Precio" step="0.01" value="{{ $dish->Precio }}" required>
         </div>
 
-        <button type="submit" class="btn btn-primary">Actualizar Plato</button>
+        <div>
+            <label for="Activo">Estado activo:</label>
+            <select name="Activo" id="Activo">
+                <option value="1" {{ $dish->Activo ? 'selected' : '' }}>Activo</option>
+                <option value="0" {{ $dish->Activo ? '' : 'selected' }}>Inactivo</option>
+            </select>
+        </div>
+
+        <div>
+            <label for="Imagen">Imagen:</label>
+            <input type="file" name="Imagen" accept="image/*">
+        </div>
+
+        <button type="submit">Actualizar Plato</button>
     </form>
 
-    <a href="{{ route('dish.index') }}" class="btn btn-secondary mt-2">Volver a la Lista de Platos</a>
-@endsection
+    <a href="{{ route('dish.index') }}">Volver a la Lista de Platos</a>
+</body>
+</html>

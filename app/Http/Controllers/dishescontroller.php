@@ -34,20 +34,26 @@ class dishesController extends Controller
             'Nombre' => 'required|string|max:100',
             'Descripcion' => 'required|string|max:200',
             'Precio' => 'required|numeric',
+            'Imagen' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
+
+        // Subir la imagen y obtener su nombre
+        $image = $request->file('Imagen');
+        $imageName = time() . '.' . $image->getClientOriginalExtension();
+        $image->move(public_path('images'), $imageName);
 
         // Crear un nuevo plato en la base de datos
         dishes::create([
             'Nombre' => $request->input('Nombre'),
             'Descripcion' => $request->input('Descripcion'),
             'Precio' => $request->input('Precio'),
+            'Imagen' => $imageName,
+            'Activo' => $request->input('Activo', 0), // Valor predeterminado a 0 si no se selecciona
         ]);
 
-        // Redirigir a la página de lista de platos
         return redirect()->route('dish.index')->with('success', 'Plato creado con éxito.');
     }
-
-    /**
+     /**
      * Display the specified dish.
      */
     public function show(dishes $dish)
@@ -68,7 +74,6 @@ class dishesController extends Controller
      */
     public function update(Request $request, dishes $dish)
     {
-        // Validar y actualizar los datos del plato
         $request->validate([
             'Nombre' => 'required|string|max:100',
             'Descripcion' => 'required|string|max:200',
@@ -81,7 +86,8 @@ class dishesController extends Controller
             'Precio' => $request->input('Precio'),
         ]);
 
-        // Redirigir a la página de lista de platos
+                
+
         return redirect()->route('dish.index')->with('success', 'Plato actualizado con éxito.');
     }
 
@@ -90,12 +96,54 @@ class dishesController extends Controller
      */
     public function destroy(dishes $dish)
     {
-        if ($dish) {
-            // Eliminar el plato de la base de datos
-            $dish->delete();
+        $dish->delete();
+        return redirect()->route('dish.index')->with('success', 'Plato eliminado con éxito.');
+    }
+
+
+    /**
+     * Show the form for uploading an image for a dish.
+     */
+    public function showImageUploadForm()
+    {
+        return view('dish.uploadImage');
+    }
+
+    /**
+     * Handle image upload for a dish.
+     */
+    public function uploadImage(Request $request)
+    {
+        $request->validate([
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+
+        $image = $request->file('image');
+        $imageName = time() . '.' . $image->getClientOriginalExtension();
+        $image->move(public_path('images'), $imageName);
+
+        return redirect()->back()->with('success', 'Imagen subida con éxito.');
+    }
+    public function activate(dishes $dish)
+    {
+        $dish->update(['Activo' => true]);
+        return redirect()->route('dish.index')->with('success', 'Plato activado con éxito.');
+    }
     
-            // Redirigir a la página de lista de platos
-            return redirect()->route('dish.index')->with('success', 'Plato eliminado con éxito.');
-        }
+    public function deactivate(dishes $dish)
+    {
+        $dish->update(['Activo' => false]);
+        return redirect()->route('dish.index')->with('success', 'Plato desactivado con éxito.');
+    }
+    public function setDishActive(dishes $dish)
+    {
+        $dish->setActive();
+        return redirect()->route('dish.index')->with('success', 'Plato activado con éxito.');
+    }
+    
+    public function setDishInactive(dishes $dish)
+    {
+        $dish->setInactive();
+        return redirect()->route('dish.index')->with('success', 'Plato desactivado con éxito.');
     }
 }

@@ -1,39 +1,85 @@
-@extends('layouts.app')
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Crear Cliente</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+        }
+        form {
+            background-color: #fff;
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+        }
+        label, input {
+            display: block;
+            margin-bottom: 10px;
+        }
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            background-color: #4CAF50;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        a {
+            display: block;
+            text-align: center;
+            margin-top: 10px;
+            color: #4CAF50;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    
 
-@section('content')
-    <div style="margin: 20px auto; max-width: 400px;">
-        <h1 style="text-align: center;">Crear Cliente</h1>
+    
+    <form method="POST" action="{{ route('customers.store') }}">
+        @csrf
 
-        <form method="POST" action="{{ route('customers.store') }}" style="margin-top: 20px;">
-            @csrf
-            <div style="margin-bottom: 10px;">
-                <label for="id" style="display: block;">ID:</label>
-                <input type="text" name="id" id="id" style="width: 100%; padding: 5px;" required>
-            </div>
+        <div>
+            <label for="Nombre">Nombre:</label>
+            <input type="text" name="Nombre" id="Nombre" required>
+        </div>
 
-            <div style="margin-bottom: 10px;">
-                <label for="Nombre" style="display: block;">Nombre:</label>
-                <input type="text" name="Nombre" id="Nombre" style="width: 100%; padding: 5px;" required>
-            </div>
+        <div>
+            <label for="Telefono">Teléfono:</label>
+            <input type="text" name="Telefono" id="Telefono" required>
+        </div>
 
-            <div style="margin-bottom: 10px;">
-                <label for="Telefono" style="display: block;">Teléfono:</label>
-                <input type="text" name="Telefono" id="Telefono" style="width: 100%; padding: 5px;" required>
-            </div>
+        <div>
+            <label for="Email">Email:</label>
+            <input type="email" name="Email" id="Email" required>
+        </div>
 
-            <div style="margin-bottom: 10px;">
-                <label for="Email" style="display: block;">Email:</label>
-                <input type="email" name="Email" id="Email" style="width: 100%; padding: 5px;" required>
-            </div>
+        <div>
+            <label for="FechaRegistro">Fecha de Registro:</label>
+            <input type="date" name="FechaRegistro" id="FechaRegistro" required>
+        </div>
 
-            <div style="margin-bottom: 10px;">
-                <label for="FechaRegistro" style="display: block;">Fecha de Registro:</label>
-                <input type="date" name="FechaRegistro" id="FechaRegistro" style="width: 100%; padding: 5px;" required>
-            </div>
+        <button type="submit">Guardar Cliente</button>
+    </form>
 
-            <button type="submit" style="background-color: #007bff; color: #fff; border: none; padding: 10px; cursor: pointer;">Guardar Cliente</button>
-        </form>
-
-        <a href="{{ route('customers.index') }}" style="display: block; margin-top: 10px; text-align: center; text-decoration: none; color: #007bff;">Volver a la Lista de Clientes</a>
-    </div>
-@endsection
+    <a href="{{ route('customers.index') }}">Volver a la Lista de Clientes</a>
+</body>
+</html>

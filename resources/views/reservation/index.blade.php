@@ -1,8 +1,24 @@
-@extends('layouts.app')
 
-@section('content')
-<div class="container">
-    <h1>Lista de Reservaciones</h1>
+<style>
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+    th, td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+    tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+    th {
+        background-color: #4CAF50;
+        color: white;
+    }
+</style>
+
+    <h1>Lista de Reservas</h1>
 
     @if(session('success'))
         <div class="alert alert-success">
@@ -10,10 +26,11 @@
         </div>
     @endif
 
-    <table class="table">
+    <a href="{{ route('reservation.create') }}">Crear Nueva Reserva</a>
+
+    <table>
         <thead>
             <tr>
-                <th>#</th>
                 <th>Cliente</th>
                 <th>Fecha de Reserva</th>
                 <th>Número de Personas</th>
@@ -23,24 +40,19 @@
         <tbody>
             @foreach($reservations as $reservation)
                 <tr>
-                    <td>{{ $reservation->id }}</td>
-                    <td>{{ $reservation->customer->nombre }}</td>
+                    <td>{{ $reservation->customer_id }}</td>
                     <td>{{ $reservation->FechaReserva }}</td>
                     <td>{{ $reservation->NumeroPersonas }}</td>
                     <td>
-                        <a href="{{ route('reservation.show', $reservation->id) }}" class="btn btn-info">Ver</a>
-                        <a href="{{ route('reservation.edit', $reservation->id) }}" class="btn btn-primary">Editar</a>
-                        <form action="{{ route('reservation.destroy', $reservation->id) }}" method="POST" style="display: inline">
+                        <a href="{{ route('reservation.show', $reservation->id) }}">Ver</a>
+                        <a href="{{ route('reservation.edit', $reservation->id) }}">Editar</a>
+                        <form method="POST" action="{{ route('reservation.destroy', $reservation->id) }}">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="btn btn-danger" onclick="return confirm('¿Estás seguro de que quieres eliminar esta reservación?')">Eliminar</button>
+                            <button type="submit">Eliminar</button>
                         </form>
                     </td>
                 </tr>
             @endforeach
         </tbody>
     </table>
-
-    <a href="{{ route('reservation.create') }}" class="btn btn-success">Crear Reservación</a>
-</div>
-@endsection

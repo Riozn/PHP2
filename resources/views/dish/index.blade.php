@@ -1,14 +1,45 @@
-@extends('layouts.app')
-
-@section('content')
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lista de Platos</title>
+</head>
+<style>
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+    th, td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+    tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+    th {
+        background-color: #4CAF50;
+        color: white;
+    }
+</style>
+<body>
     <h1>Lista de Platos</h1>
-    <a href="{{ route('dish.create') }}" class="btn btn-primary mb-3">Crear Plato</a>
-    <table class="table table-bordered">
+
+    @if(session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
+
+    <a href="{{ route('dish.create') }}">Crear Nuevo Plato</a>
+
+    <table>
         <thead>
             <tr>
                 <th>Nombre</th>
-                <th>Descripcion</th>
+                <th>Descripción</th>
                 <th>Precio</th>
+                <th>Estado Activo</th>
+                <th>Imagen</th>
                 <th>Acciones</th>
             </tr>
         </thead>
@@ -18,17 +49,22 @@
                     <td>{{ $dish->Nombre }}</td>
                     <td>{{ $dish->Descripcion }}</td>
                     <td>{{ $dish->Precio }}</td>
+                    <td>{{ $dish->Activo ? 'Activo' : 'Inactivo' }}</td>
                     <td>
-                        <a href="{{ route('dish.show', $dish->id) }}" class="btn btn-info">Ver Detalles</a>
-                        <a href="{{ route('dish.edit', $dish->id) }}" class="btn btn-warning">Editar</a>
-                        <form action="{{ route('dish.destroy', $dish->id) }}" method="post" class="d-inline">
+                        <img src="{{ $dish->getImageUrl() }}" alt="Imagen del plato" width="100">
+                    </td>
+                    <td>
+                        <a href="{{ route('dish.show', $dish->id) }}">Ver</a>
+                        <a href="{{ route('dish.edit', $dish->id) }}">Editar</a>
+                        <form method="POST" action="{{ route('dish.destroy', $dish->id) }}">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="btn btn-danger" onclick="return confirm('¿Estás seguro de que deseas eliminar este plato?')">Eliminar</button>
+                            <button type="submit">Eliminar</button>
                         </form>
                     </td>
                 </tr>
             @endforeach
         </tbody>
     </table>
-@endsection
+</body>
+</html>

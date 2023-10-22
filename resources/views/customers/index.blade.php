@@ -1,53 +1,70 @@
-@extends('layouts.app')
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lista de Clientes</title>
+</head>
+<style>
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+    th, td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+    tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+    th {
+        background-color: #4CAF50;
+        color: white;
+    }
+</style>
+<body>
+    <h1>Lista de Clientes</h1>
+   
+    <a href="{{ route('customers.create') }}">Crear Nuevo Cliente</a>
+    @if(session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
+>
 
-@section('content')
-<div class="container">
-    <h1 class="my-4">Gestión de Clientes</h1>
+    <a href="{{ route('customers.create') }}"></a>
 
-    <div class="d-flex justify-content-between align-items-center">
-        <a href="{{ route('customers.create') }}" class="btn btn-primary">Crear Cliente</a>
-
-        <form class="form-inline">
-            <input class="form-control mr-sm-2" type="search" placeholder="Buscar cliente" aria-label="Buscar">
-            <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Buscar</button>
-        </form>
-    </div>
-
-    <table class="table mt-4">
-        <thead class="thead-dark">
+    <table>
+        <thead>
             <tr>
-                <th scope="col">ID</th>
-                <th scope="col">Nombre</th>
-                <th scope="col">Teléfono</th>
-                <th scope="col">Correo Electrónico</th>
-                <th scope="col">Fecha de Registro</th>
-                <th scope="col">Acciones</th>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Teléfono</th>
+                <th>Email</th>
+                <th>Fecha de Registro</th>
+                <th>Acciones</th>
             </tr>
         </thead>
         <tbody>
             @foreach($customers as $customer)
-            <tr>
-                <th scope="row">{{ $customer->id }}</th>
-                <td>{{ $customer->Nombre }}</td>
-                <td>{{ $customer->Telefono }}</td>
-                <td>{{ $customer->Email }}</td>
-                <td>{{ $customer->FechaRegistro }}</td>
-                <td class="text-center">
-                    <div class="btn-group" role="group">
-                        <a href="{{ route('customers.show', $customer->id) }}" class="btn btn-info btn-sm">Detalles</a>
-                        <a href="{{ route('customers.edit', $customer->id) }}" class="btn btn-warning btn-sm">Editar</a>
-                        <form action="{{ route('customers.destroy', $customer->id) }}" method="post" class="d-inline">
+                <tr>
+                    <td>{{ $customer->id }}</td>
+                    <td>{{ $customer->Nombre }}</td>
+                    <td>{{ $customer->Telefono }}</td>
+                    <td>{{ $customer->Email }}</td>
+                    <td>{{ $customer->FechaRegistro }}</td>
+                    <td>
+                        <a href="{{ route('customers.show', $customer->id) }}">Ver</a>
+                        <a href="{{ route('customers.edit', $customer->id) }}">Editar</a>
+                        <form method="POST" action="{{ route('customers.destroy', $customer->id) }}">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
+                            <button type="submit">Eliminar</button>
                         </form>
-                    </div>
-                </td>
-            </tr>
+                    </td>
+                </tr>
             @endforeach
         </tbody>
     </table>
-</div>
-@endsection
-
-
+</body>
+</html>

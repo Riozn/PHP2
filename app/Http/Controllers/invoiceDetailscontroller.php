@@ -23,89 +23,71 @@ class InvoiceDetailsController extends Controller
     /**
      * Show the form for creating a new invoice detail.
      */
-    public function create()
-    {
-        return view('invoiceDetails.create');
-    }
+   
+   // Muestra el formulario para crear un nuevo detalle de factura
+   public function create()
+   {
+       $orders = order::all();
+       $dishes = dishes::all();
+       return view('invoiceDetails.create', compact('orders', 'dishes'));
+   }
 
-    /**
-     * Store a newly created invoice detail in storage.
-     */
-    public function store(Request $request)
+   // Almacena un nuevo detalle de factura en la base de dato
+   
+      public function store(Request $request)
     {
-        // Validamos los datos del formulario
         $request->validate([
-            'OrderID' => 'required|integer',
-            'DishID' => 'required|integer',
-            'Cantidad' => 'required|integer',
-            'PrecioUnitario' => 'required|numeric',
-            // Agrega reglas de validación para otros campos si es necesario
-        ]);
-
-        // Creamos un nuevo detalle de factura en la base de datos
-        $invoiceDetail = new InvoiceDetail();
-        $invoiceDetail->OrderID = $request->input('OrderID');
-        $invoiceDetail->DishID = $request->input('DishID');
-        $invoiceDetail->Cantidad = $request->input('Cantidad');
-        $invoiceDetail->PrecioUnitario = $request->input('PrecioUnitario');
-        // Asigna otros campos aquí si es necesario
-
-        $invoiceDetail->save(); // Guardamos el detalle de factura en la base de datos
-
-        // Redirigimos a la vista de lista de detalles de factura con un mensaje de éxito
-        return redirect()->route('invoiceDetails.index')->with('success', 'Detalle de factura creado con éxito.');
-    }
-    
-
-    /**
-     * Display the specified invoice detail.
-     */
-    public function show(InvoiceDetail $invoiceDetail)
-    {
-        return view('invoiceDetails.show', compact('invoiceDetail'));
-    }
-
-    /**
-     * Show the form for editing the specified invoice detail.
-     */
-    public function edit(InvoiceDetail $invoiceDetail)
-    {
-        return view('invoiceDetails.edit', compact('invoiceDetail'));
-    }
-
-    /**
-     * Update the specified invoice detail in storage.
-     */
-    public function update(Request $request, InvoiceDetail $invoiceDetail)
-    {
-        // Validar y actualizar los datos del detalle de factura
-        $request->validate([
-            'OrderID' => 'required|integer',
-            'DishID' => 'required|integer',
+            'OrdenID' => 'required|integer',
+            'PlatoID' => 'required|integer',
             'Cantidad' => 'required|integer',
             'PrecioUnitario' => 'required|numeric',
         ]);
 
-        $invoiceDetail->update([
-            'OrderID' => $request->input('OrderID'),
-            'DishID' => $request->input('DishID'),
+        $reservationDetail = new ReservationDetail();
+        $reservationDetail->OrdenID = $request->input('OrdenID');
+        $reservationDetail->PlatoID = $request->input('PlatoID');
+        $reservationDetail->Cantidad = $request->input('Cantidad');
+        $reservationDetail->PrecioUnitario = $request->input('PrecioUnitario');
+        $reservationDetail->save();
+
+        return redirect()->route('reservationDetails.index')->with('success', 'Detalle de reserva creado con éxito.');
+    }
+
+    public function show(ReservationDetail $reservationDetail)
+    {
+        return view('reservationDetails.show', compact('reservationDetail'));
+    }
+
+    public function edit(ReservationDetail $reservationDetail)
+    {
+        $orders = Order::all();
+        $dishes = Dish::all();
+        return view('reservationDetails.edit', compact('reservationDetail', 'orders', 'dishes'));
+    }
+
+    public function update(Request $request, ReservationDetail $reservationDetail)
+    {
+        $request->validate([
+            'OrdenID' => 'required|integer',
+            'PlatoID' => 'required|integer',
+            'Cantidad' => 'required|integer',
+            'PrecioUnitario' => 'required|numeric',
+        ]);
+
+        $reservationDetail->update([
+            'OrdenID' => $request->input('OrdenID'),
+            'PlatoID' => $request->input('PlatoID'),
             'Cantidad' => $request->input('Cantidad'),
             'PrecioUnitario' => $request->input('PrecioUnitario'),
         ]);
 
-        // Redirigir a la página de lista de detalles de factura
-        return redirect()->route('invoiceDetails.index')->with('success', 'Detalle de factura actualizado con éxito.');
+        return redirect()->route('reservationDetails.index')->with('success', 'Detalle de reserva actualizado con éxito.');
     }
 
-    /**
-     * Remove the specified invoice detail from storage.
-     */
-    public function destroy(InvoiceDetail $invoiceDetail)
+    public function destroy(ReservationDetail $reservationDetail)
     {
-        // Eliminar el detalle de factura de la base de datos
-        $invoiceDetail->delete();
-
-        // Redirigir a la página de lista de detalles de factura
-        return redirect()->route('invoiceDetails.index')->with('success', 'Detalle de factura eliminado con éxito.');
+        $reservationDetail->delete();
+        return redirect()->route('reservationDetails.index')->with('success', 'Detalle de reserva eliminado con éxito.');
     }
 }
+

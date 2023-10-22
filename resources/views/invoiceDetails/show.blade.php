@@ -1,11 +1,30 @@
-@extends('layouts.app')
-
-@section('content')
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Detalles de Factura</title>
+</head>
+<body>
     <h1>Detalle de Factura</h1>
-    <p><strong>ID:</strong> {{ $invoiceDetail->id }}</p>
-    <p><strong>Order ID:</strong> {{ $invoiceDetail->OrdenID }}</p>
-    <p><strong>Dish ID:</strong> {{ $invoiceDetail->PlatoID }}</p>
-    <p><strong>Cantidad:</strong> {{ $invoiceDetail->Cantidad }}</p>
-    <p><strong>Precio Unitario:</strong> {{ $invoiceDetail->PrecioUnitario }}</p>
-    <a href="{{ route('invoiceDetails.index') }}" class="btn btn-secondary">Volver</a>
-@endsection
+
+    <table>
+        <tr>
+            <th>ID de Orden:</th>
+            <td>{{ $invoiceDetail->OrdenID }}</td>
+        </tr>
+        <tr>
+            <th>ID de Plato:</th>
+            <td>{{ $invoiceDetail->PlatoID }}</td>
+        </tr>
+        <tr>
+            <th>Cantidad:</th>
+            <td>{{ $invoiceDetail->Cantidad }}</td>
+        </tr>
+        <tr>
+            <th>Precio Unitario:</th>
+            <td>{{ $invoiceDetail->PrecioUnitario }}</td>
+        </tr>
+    </table>
+
+    <a href="{{ route('invoiceDetails.index') }}">Volver a la lista de detalles de factura</a>
+</body>
+</html>
