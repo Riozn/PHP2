@@ -1,48 +1,34 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Detalles de Factura</title>
-</head>
-<body>
-    <h1>Detalles de Factura</h1>
+@extends('layouts.app')
 
-    @if (session('success'))
-        <div class="alert alert-success">
-            {{ session('success') }}
-        </div>
-    @endif
-
-    <table>
+@section('content')
+    <h1>Listado de Detalles de Factura</h1>
+    <table class="table">
         <thead>
             <tr>
-                <th>ID de Orden</th>
-                <th>ID de Plato</th>
+                <th>ID</th>
+                <th>OrdenID</th>
+                <th>PlatoID</th>
                 <th>Cantidad</th>
                 <th>Precio Unitario</th>
                 <th>Acciones</th>
             </tr>
         </thead>
         <tbody>
-            @foreach ($invoiceDetails as $invoiceDetail)
+            @foreach ($invoiceDetails as $detail)
                 <tr>
-                    <td>{{ $invoiceDetail->OrdenID }}</td>
-                    <td>{{ $invoiceDetail->PlatoID }}</td>
-                    <td>{{ $invoiceDetail->Cantidad }}</td>
-                    <td>{{ $invoiceDetail->PrecioUnitario }}</td>
+                    <td>{{ $detail->id }}</td>
+                    <td>{{ $detail->OrdenID }}</td>
+                    <td>{{ $detail->PlatoID }}</td>
+                    <td>{{ $detail->Cantidad }}</td>
+                    <td>{{ $detail->PrecioUnitario }}</td>
                     <td>
-                        <a href="{{ route('invoiceDetails.show', $invoiceDetail) }}">Ver</a>
-                        <a href="{{ route('invoiceDetails.edit', $invoiceDetail) }}">Editar</a>
-                        <form method="POST" action="{{ route('invoiceDetails.destroy', $invoiceDetail) }}">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit">Eliminar</button>
-                        </form>
+                        <a href="{{ route('invoiceDetails.show', $detail->id) }}" class="btn btn-primary">Ver</a>
+                        <a href="{{ route('invoiceDetails.edit', $detail->id) }}" class="btn btn-warning">Editar</a>
+                        <!-- Agrega el formulario de eliminación aquí si lo deseas -->
                     </td>
                 </tr>
             @endforeach
         </tbody>
     </table>
-
-    <a href="{{ route('invoiceDetails.create') }}">Crear Nuevo Detalle de Factura</a>
-</body>
-</html>
+    <a href="{{ route('invoiceDetails.create') }}" class="btn btn-success">Crear Detalle de Factura</a>
+@endsection
