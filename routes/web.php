@@ -45,3 +45,7 @@ Route::post('/dish/{dish}/setInactive', 'DishController@setDishInactive')->name(
 Route::post('/dishes', [dishesController::class, 'store'])->name('dishes.store');
 
 Route::resource('mesa', MesaController::class);
+
+Route::post('/reservation/{reservation}/setActive', 'ReservationController@setReservationActive')->name('reservation.setActive');
+
+Route::post('/reservation/{reservation}/setInactive', 'reservation@setreservationInactive')->name('reservation.setInactive');
