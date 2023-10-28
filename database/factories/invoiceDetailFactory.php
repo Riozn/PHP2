@@ -3,9 +3,9 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use App\Models\Order; // Asegúrate de usar la convención de nombres correcta
-use App\Models\Dishes; // Asegúrate de usar la convención de nombres correcta
-use App\Models\InvoiceDetail;
+use App\Models\order; 
+use App\Models\dishes; 
+use App\Models\invoiceDetail;
 
 class InvoiceDetailFactory extends Factory
 {
@@ -13,8 +13,8 @@ class InvoiceDetailFactory extends Factory
 
     public function definition()
     {
-        $order = Order::inRandomOrder()->first();
-        $dishes = Dishes::inRandomOrder()->first();
+        $order = order::inRandomOrder()->first();
+        $dishes = dishes::inRandomOrder()->first();
 
         return [
             'OrdenID' => $order->id,

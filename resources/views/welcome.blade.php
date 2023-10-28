@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Restaurante</title>
+  
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -20,15 +21,19 @@
         header h1 {
             font-size: 24px;
         }
+        nav {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 0;
+            text-align: center;
+        }
         nav ul {
             list-style-type: none;
             padding: 0;
-            background-color: #333;
-            text-align: center;
         }
         nav ul li {
             display: inline;
-            margin: 0 10px;
+            margin: 0 20px;
         }
         nav ul li a {
             color: #fff;
@@ -54,6 +59,7 @@
         footer p {
             margin: 0;
         }
+        
     </style>
 </head>
 <body>
@@ -63,21 +69,16 @@
 
     <nav>
         <ul>
-          
-            <li><a href="{{ route('dish.index') }}">Ver Platos</a></li>
-            <li><a href="{{ route('customers.index') }}">Ver Clientes</a></li>
-            <li><a href="{{ route('invoiceDetails.index') }}">Ver Facturas</a></li>
-            <li><a href="{{ route('orders.index') }}">Ver Órdenes</a></li>
-            <li><a href="{{ route('reservation.index') }}">Ver Reservaciones</a></li>
+            <li><a href="{{ route('dish.index') }}">Platos</a></li>
+            <li><a href="{{ route('customers.index') }}">Clientes</a></li>
+            <li><a href="{{ route('invoiceDetails.index') }}"> Facturas</a></li>
+            <li><a href="{{ route('orders.index') }}"> Órdenes</a></li>
+            <li><a href="{{ route('reservation.index') }}"> Reservaciones</a></li>
+            <li><a href="{{ route('mesa.index') }}">Ir a la lista de mesas</a></li>
+           
         </ul>
     </nav>
 
-    <main>
-        <section>
-            <h2>Sección Principal</h2>
-            <p>Esta es la página de inicio de la aplicación. Puedes agregar contenido adicional aquí.</p>
-        </section>
-    </main>
 
     <footer>
         <p>&copy; {{ date("Y") }} Mi Aplicación</p>

@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>Detalles de la Reservación</title>
+    <title>Detalles de Reservación</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -46,18 +46,23 @@
 </head>
 <body>
     <header>
-        <h1>Detalles de la Reservación</h1>
+        <h1>Detalles de Reservación</h1>
     </header>
 
     <div class="container">
-        <h1>Detalles de la Reservación</h1>
+        <h1>Detalles de Reservación</h1>
 
-        <p>ID de Cliente: {{ $reservation->customer_id }}</p> <!-- Accede al ID del cliente relacionado -->
-        <p>Nombre del Cliente: {{ $reservation->customer->nombre }}</p>
-        <p>Fecha de Reserva: {{ $reservation->FechaReserva }}</p>
-        <p>Número de Personas: {{ $reservation->NumeroPersonas }}</p>
+        <div class="details">
+            <h2>ID de Reserva: {{ $reservation->id }}</h2>
+            <p><strong>Cliente:</strong> {{ $reservation->customer->nombre }}</p>
+            <p><strong>Fecha de Reserva:</strong> {{ $reservation->FechaReserva }}</p>
+            <p><strong>Número de Personas:</strong> {{ $reservation->NumeroPersonas }}</p>
+            <p><strong>Estado:</strong> {{ $reservation->estado }}</p>
 
-        <a href="{{ route('reservation.index') }}" class="btn btn-primary">Volver a la lista de reservas</a>
+            <!-- Agrega más detalles de la reserva si es necesario -->
+
+            <a href="{{ route('reservation.index') }}" class="btn btn-primary">Volver a la lista</a>
+        </div>
     </div>
 </body>
 </html>

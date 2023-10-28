@@ -35,6 +35,8 @@
                 <th>Fecha de Reserva</th>
                 <th>Número de Personas</th>
                 <th>Acciones</th>
+                <th>Activo</th>
+                <th>mesa</th>
             </tr>
         </thead>
         <tbody>
@@ -43,6 +45,8 @@
                     <td>{{ $reservation->customer_id }}</td>
                     <td>{{ $reservation->FechaReserva }}</td>
                     <td>{{ $reservation->NumeroPersonas }}</td>
+                    <td>{{ $reservation->Activo ? 'Activo' : 'Inactivo' }}</td>
+                    <td>{{ $reservation->mesa_id}}</td>
                     <td>
                         <a href="{{ route('reservation.show', $reservation->id) }}">Ver</a>
                         <a href="{{ route('reservation.edit', $reservation->id) }}">Editar</a>

@@ -6,7 +6,8 @@ use App\Http\Controllers\dishesController;
 use App\Http\Controllers\InvoiceDetailsController;
 use App\Http\Controllers\ordersController;
 use App\Http\Controllers\ReservationController;
-use App\Http\Controllers\HomeController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\MesaController;
 
 
 
@@ -35,13 +36,12 @@ Route::resource('orders', ordersController::class);
 
 Route::resource('invoiceDetails', InvoiceDetailsController::class);
 
-Route::resource('reservacion', ReservacionController::class);
+Route::resource('reservation', ReservationController::class);
 
 Route::post('/dish/{dish}/setActive', 'DishController@setDishActive')->name('dish.setActive');
 
 Route::post('/dish/{dish}/setInactive', 'DishController@setDishInactive')->name('dish.setInactive');
 
+Route::post('/dishes', [dishesController::class, 'store'])->name('dishes.store');
 
-
-
-
+Route::resource('mesa', MesaController::class);

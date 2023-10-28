@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Reservation;
 use App\Models\customer;
+use App\Models\Mesa;
 
 
 use Illuminate\Http\Request;
@@ -32,12 +33,15 @@ class ReservationController extends Controller
          'customer_id' => 'required|integer', 
          'FechaReserva' => 'required|date',  
          'NumeroPersonas' => 'required|integer', 
+         'mesa_id' =>'required|integer', 
      ]);
 
      Reservation::create([
           'customer_id' => $request->input('customer_id'),
          'FechaReserva' => $request->input('FechaReserva'),
          'NumeroPersonas' => $request->input('NumeroPersonas'),
+         'mesa_id' => $request->input('mesa_id'), 
+         'Activo' => $request->input('Activo', 0), // Valor predeterminado a 0 si no se selecciona
      ]);
 
      return redirect()->route('reservation.index')->with('success', 'Reservación creada con éxito.');
@@ -80,4 +84,26 @@ class ReservationController extends Controller
      $reservation->delete();
      return redirect()->route('reservation.index')->with('success', 'Reservación eliminada con éxito.');
  }
+    public function activate(Reservation $reservation)
+         {
+            $reservation->update(['Activo' => true]);
+            return redirect()->route('reservation.index')->with('success', 'Plato activado con éxito.');
+        }
+        
+        public function deactivate(Reservation $reservation)
+        {
+            $reservation->update(['Activo' => false]);
+            return redirect()->route('reservation.index')->with('success', 'Plato desactivado con éxito.');
+        }
+        public function setDishActive(Reservation $reservation)
+        {
+            $reservation->setActive();
+            return redirect()->route('reservation.index')->with('success', 'mesa activado con éxito.');
+        }
+        
+        public function setDishInactive(Reservation $reservation)
+        {
+            $reservation->setInactive();
+            return redirect()->route('reservation.index')->with('success', 'mesa desactivado con éxito.');
+        }
 }

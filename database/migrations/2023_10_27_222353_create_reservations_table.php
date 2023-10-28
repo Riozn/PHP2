@@ -16,8 +16,11 @@ return new class extends Migration
             $table->unsignedBigInteger('customers_id')->default(1);
             $table->date('FechaReserva');
             $table->bigInteger('NumeroPersonas');
+            $table->unsignedBigInteger('mesa_id');
+            $table->boolean('Activo')->default(true);
             $table->timestamps();
             $table->foreign('customers_id')->references('id')->on('customers');
+            $table->foreign('mesa_id')->references('id')->on('mesas');
         });
     }
 

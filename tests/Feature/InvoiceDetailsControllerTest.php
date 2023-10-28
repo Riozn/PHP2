@@ -5,6 +5,7 @@ namespace Tests\Feature;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
+use App\Models\invoiceDetails;
 
 class InvoiceDetailsControllerTest extends TestCase
 {
@@ -13,8 +14,8 @@ class InvoiceDetailsControllerTest extends TestCase
      */
     public function test_example(): void
     {
-        $order = Order::factory()->create();
-        $dish = Dish::factory()->create();
+        $order = order::factory()->create();
+        $dish = dishes::factory()->create();
         
         // Datos de detalle de factura
         $data = [

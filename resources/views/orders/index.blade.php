@@ -88,7 +88,7 @@
                         <td>
                             <a href="{{ route('orders.show', $order->id) }}" class="btn btn-info">Ver</a>
                             <a href="{{ route('orders.edit', $order->id) }}" class="btn btn-warning">Editar</a>
-                            <!-- Agrega un botón o enlace para eliminar la orden si es necesario -->
+                          
                         </td>
                     </tr>
                 @endforeach

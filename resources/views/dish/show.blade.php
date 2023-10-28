@@ -27,7 +27,7 @@
             <th>Imagen:</th>
             <td>
                 @if ($dish->Imagen)
-                    <img src="{{ asset('storage/' . $dish->Imagen) }}" alt="Imagen del plato" width="200">
+                <img src="{{ asset('storage/images/' . $dish->Imagen) }}" alt="Imagen del plato" width="200">
                 @else
                     No hay imagen disponible
                 @endif
