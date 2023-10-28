@@ -75,6 +75,8 @@
             <li><a href="{{ route('orders.index') }}"> Órdenes</a></li>
             <li><a href="{{ route('reservation.index') }}"> Reservaciones</a></li>
             <li><a href="{{ route('mesa.index') }}">Ir a la lista de mesas</a></li>
+            <li><a href="{{route('login')}}">Login</a></li>
+            <li><a href="{{route('register')}}">register</a></li>
            
         </ul>
     </nav>

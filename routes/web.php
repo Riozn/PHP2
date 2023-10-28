@@ -8,6 +8,7 @@ use App\Http\Controllers\ordersController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\MesaController;
+use App\Http\Controllers\Auth\AuthController;
 
 
 
@@ -25,6 +26,26 @@ use App\Http\Controllers\MesaController;
 Route::get('/', function () {
     return view('welcome');
 });
+
+//auth
+Route::prefix('auth')->group(function(){
+    //rutas de login
+   Route::get('login', [AuthController::class, 'login'])->name('login');
+   Route::POST('login', [AuthController::class, 'loginVerify'])->name('login.verify');
+
+//rutas de register
+   Route::get('register', [AuthController::class,'register'])->name('register');
+   Route::post('register',[AuthController::class,'registerVerify']);
+   Route::post('signOnut',[AuthController::class,'signOnut'])->name('signOut');
+
+   
+});
+   //protegidas
+   Route::middleware('auth')->group(function() {
+       Route::get('dashboard', function(){
+         return view('dashboard.index');
+       })->name('dashboard');
+   });
 
 
 Route::resource('customers', customersController::class);
