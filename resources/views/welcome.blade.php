@@ -108,6 +108,7 @@
 
     <nav>
         <ul>
+<<<<<<< HEAD
             <li><a href="{{ route('dish.index') }}">Ver Platos</a></li>
             <li><a href="{{ route('customers.index') }}">Ver Clientes</a></li>
             <li><a href="{{ route('invoiceDetails.index') }}">Ver Facturas</a></li>
@@ -115,6 +116,17 @@
             <li><a href="{{ route('reservation.index') }}">Ver Reservaciones</a></li>
             <li><a href="{{ route('login')}}">login</a></li>
             <li><a href="{{ route('register')}}">register</a></li>
+=======
+            <li><a href="{{ route('dish.index') }}">Platos</a></li>
+            <li><a href="{{ route('customers.index') }}">Clientes</a></li>
+            <li><a href="{{ route('invoiceDetails.index') }}"> Facturas</a></li>
+            <li><a href="{{ route('orders.index') }}"> Órdenes</a></li>
+            <li><a href="{{ route('reservation.index') }}"> Reservaciones</a></li>
+            <li><a href="{{ route('mesa.index') }}">Ir a la lista de mesas</a></li>
+            <li><a href="{{route('login')}}">Login</a></li>
+            <li><a href="{{route('register')}}">register</a></li>
+           
+>>>>>>> e29d24295fa588e7f396fa7cfd222e789cb96c20
         </ul>
     </nav>
 
