@@ -83,12 +83,10 @@
                 <option value="0">Inactivo</option>
             </select>
         </div>
-
-        <div>
+        <div class="form-group">
             <label for="Imagen">Imagen:</label>
-            <input type="file" name="Imagen" accept="image/*">
-        </div>
-
+            <input type="file" name="Imagen" class="form-control" required>
+        </div>
         <button type="submit">Guardar Plato</button>
     </form>
 

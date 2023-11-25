@@ -27,10 +27,12 @@
             <th>Imagen:</th>
             <td>
                 @if ($dish->Imagen)
-                <img src="{{ asset('storage/images/' . $dish->Imagen) }}" alt="Imagen del plato" width="200">
+                    <img src="{{ asset('images/' . $dish->Imagen) }}" alt="{{ $dish->Nombre }}" style="max-width: 300px">
                 @else
-                    No hay imagen disponible
+                    <p>No hay imagen disponible.</p>
                 @endif
+    
+            <a href="{{ route('dish.edit', $dish) }}" class="btn btn-primary">Editar Plato</a>
             </td>
         </tr>
     </table>

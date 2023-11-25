@@ -21,7 +21,6 @@
             color: white;
         }
     </style>
-       
 </head>
 <body>
     <div class="container">
@@ -39,17 +38,17 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($invoiceDetails as $invoiceDetails)
+                @foreach ($invoiceDetails as $invoiceDetail)
                     <tr>
-                        <td>{{ $invoiceDetails->id }}</td>
-                        <td>{{ $invoiceDetails->OrderID }}</td>
-                        <td>{{ $invoiceDetails->PlatoID }}</td>
-                        <td>{{ $invoiceDetails->Cantidad }}</td>
-                        <td>{{ $invoiceDetails->PrecioUnitario }}</td>
+                        <td>{{ $invoiceDetail->id }}</td>
+                        <td>{{ $invoiceDetail->OrderID }}</td>
+                        <td>{{ $invoiceDetail->PlatoID }}</td>
+                        <td>{{ $invoiceDetail->Cantidad }}</td>
+                        <td>{{ $invoiceDetail->PrecioUnitario }}</td>
                         <td>
-                            <a href="{{ route('invoiceDetails.show', $invoiceDetails->id) }}" class="btn btn-primary">Ver</a>
-                            <a href="{{ route('invoiceDetails.edit', $invoiceDetails->id) }}" class="btn btn-warning">Editar</a>
-                            <form method="POST" action="{{ route('invoiceDetails.destroy', $invoiceDetails->id) }}" style="display: inline;">
+                            <a href="{{ route('invoiceDetails.show', $invoiceDetail->id) }}" class="btn btn-primary">Ver</a>
+                            <a href="{{ route('invoiceDetails.edit', $invoiceDetail->id) }}" class="btn btn-warning">Editar</a>
+                            <form method="POST" action="{{ route('invoiceDetails.destroy', $invoiceDetail->id) }}" style="display: inline;">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger">Eliminar</button>

@@ -67,9 +67,17 @@
                     <td>{{ $dish->Descripcion }}</td>
                     <td>{{ $dish->Precio }}</td>
                     <td>{{ $dish->Activo ? 'Activo' : 'Inactivo' }}</td>
-                    <td>
-                        <img src="{{ $dish->getImageUrl() }}" alt="Imagen del plato" width="100">
-                    </td>
+                    <tr>
+                        <th>Imagen:</th>
+                        <td>
+                            @if ($dish->Imagen)
+                                <img src="{{ asset('images/' . $dish->Imagen) }}" alt="{{ $dish->Nombre }}" style="max-width: 100px">
+                            @else
+                                No hay imagen
+                            @endif
+                        </td>
+            
+                    </td>
                     <td>
                         <a href="{{ route('dish.show', $dish->id) }}">Ver</a>
                         <a href="{{ route('dish.edit', $dish->id) }}">Editar</a>
