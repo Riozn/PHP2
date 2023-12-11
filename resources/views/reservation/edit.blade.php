@@ -1,59 +1,13 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <title>Editar Reservación</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f5f5f5;
-            margin: 0;
-            padding: 0;
-        }
-        header {
-            background-color: #000;
-            color: #fff;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            padding: 10px 0;
-            text-align: center;
-        }
-        header h1 {
-            font-size: 24px;
-        }
-        .container {
-            max-width: 800px;
-            margin: 20px auto;
-            padding: 20px;
-            background-color: #fff;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-        h1 {
-            margin-bottom: 20px;
-        }
-        .form-group {
-            margin-bottom: 10px;
-        }
-        .btn {
-            display: inline-block;
-            padding: 10px 20px;
-            text-decoration: none;
-            color: #fff;
-        }
-        .btn-primary {
-            background-color: #007bff;
-        }
-        .form-control {
-            width: 100%;
-            padding: 10px;
-        }
-    </style>
-</head>
-<body>
-    <header>
-        <h1>Editar Reservación</h1>
+@extends('layouts.app')
+
+@section('title', 'Editar Reservación')
+
+@section('content')
+    <header style="background-color: #000; color: #fff; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); padding: 10px 0; text-align: center;">
+        <h1 style="font-size: 24px;">Editar Reservación</h1>
     </header>
 
-    <div class="container">
+    <div class="container" style="max-width: 800px; margin: 20px auto; padding: 20px; background-color: #fff; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);">
         <h1>Editar Reservación</h1>
 
         <!-- Manejo de errores -->
@@ -93,5 +47,4 @@
             <button type="submit" class="btn btn-primary">Actualizar Reservación</button>
         </form>
     </div>
-</body>
-</html>
+@endsection

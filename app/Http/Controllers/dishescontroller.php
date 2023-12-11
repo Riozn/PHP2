@@ -16,6 +16,71 @@ class dishesController extends Controller
         return view('dish.index', compact('dish'));
     }
 
+    /*
+    * todo los platos
+    */
+    public function apiIndex()
+    {
+        $dish = dishes::all();
+        return response()->json($dish);
+    }
+
+    //un solo plato
+    public function apiEdit(dishes $dish)
+    {
+        return response()->json($dish);
+    }
+
+
+    public function apiUpdate(Request $request, dishes $dish)
+    {
+        
+        $validatedData = $request->validate([
+            'Nombre' => 'required|string',
+            'Descripcion' => 'required|string',
+            'Precio'=> 'required|numeric',
+            'Activo'=> 'required|string',
+            // Añade aquí otras validaciones según tus campos
+        ]);
+
+        $dish->update($validatedData);
+
+        return response()->json(['message' => 'Plato actualizado con éxito', 'dish' => $dish]);
+    }
+
+    public function apiDelete( Dishes $dish)
+    {
+        $dish->delete();
+        return response()->json(['message'=> 'Plato Eliminado','data'=> $dish]);
+    }
+
+    public function apiCreate(Request $request)
+    {
+         // Validar los datos del formulario
+         $request->validate([
+            'Nombre' => 'required|string|max:100',
+            'Descripcion' => 'required|string|max:200',
+            'Precio' => 'required|numeric',
+            'Imagen' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+
+        // Subir la imagen y obtener su nombre
+        $image = $request->file('Imagen');
+        $imageName = time() . '.' . $image->getClientOriginalExtension();
+        $image->move(public_path('images'), $imageName);
+
+        // Crear un nuevo plato en la base de datos
+        dishes::create([
+            'Nombre' => $request->input('Nombre'),
+            'Descripcion' => $request->input('Descripcion'),
+            'Precio' => $request->input('Precio'),
+            'Imagen' => $imageName,
+            'Activo' => $request->input('Activo', 0), // Valor predeterminado a 0 si no se selecciona
+        ]);
+
+        return response()->json(['message'=> 'Plato creado Exitosamente']);
+    }
+
     /**
      * Show the form for creating a new dish.
      */
@@ -23,6 +88,7 @@ class dishesController extends Controller
     {
         return view('dish.create');
     }
+
 
     /**
      * Store a newly created dish in storage.

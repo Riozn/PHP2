@@ -29,6 +29,6 @@ class InvoiceDetailSeeder extends Seeder
         \App\Models\InvoiceDetail::create($invoiceDetailData);
 
         // Utilizar factory para crear más detalles de facturas de forma aleatoria
-        InvoiceDetailFactory::new()->count(50)->create();
+        InvoiceDetailFactory::new()->count(100)->create();
     }
 }

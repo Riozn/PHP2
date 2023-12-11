@@ -32,6 +32,6 @@ class customerSeeder extends Seeder
             foreach($customers as $customer){
                 customer::create($customer);
             }
-            \Database\Factories\CustomerFactory::new()->count(50)->create();
+            \Database\Factories\CustomerFactory::new()->count(100)->create();
     }
 }

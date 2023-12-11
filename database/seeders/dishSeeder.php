@@ -24,7 +24,7 @@ class dishSeeder extends Seeder
             foreach($dish as $dish){
                 dishes::create($dish);
             }
-            \Database\Factories\dishesFactory::new()->count(50)->create();
+            \Database\Factories\dishesFactory::new()->count(100)->create();
     }
    
 }

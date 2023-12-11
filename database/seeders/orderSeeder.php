@@ -27,7 +27,7 @@ class orderSeeder extends Seeder
             order::create($order);
         }
 
-        \Database\Factories\orderFactory::new()->count(50)->create();
+        \Database\Factories\orderFactory::new()->count(100)->create();
 
     }
 }

@@ -29,6 +29,6 @@ class reservationSeeder extends Seeder
             foreach($reservation as $reservation){
                 reservation::create($reservation);
             }
-            \Database\Factories\reservationFactory::new()->count(500)->create();    
+            \Database\Factories\reservationFactory::new()->count(100)->create();    
     }
 }

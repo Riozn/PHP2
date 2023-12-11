@@ -1,8 +1,12 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <title>Crear Reserva</title>
+@extends('layouts.app')
+
+@section('title', 'Crear Reserva')
+
+@section('content')
+    <header style="background-color: #007BFF; color: #fff; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); padding: 10px 0; text-align: center;">
+        <h1 style="font-size: 24px;">Crear Reserva</h1>
+    </header>
+
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -108,5 +112,4 @@
             <button type="submit" class="btn">Crear Reserva</button>
         </form>
     </div>
-</body>
-</html>
+@endsection

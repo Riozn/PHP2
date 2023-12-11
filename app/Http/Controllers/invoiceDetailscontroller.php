@@ -16,8 +16,8 @@ class InvoiceDetailsController extends Controller
      */
     public function index()
     {
-        $invoiceDetails = InvoiceDetail::all();
-        return view('invoiceDetails.index', compact('invoiceDetails'));
+        $invoiceDetail = InvoiceDetail::all();
+        return view('invoiceDetails.index', compact('invoiceDetail'));
     }
 
     /**
@@ -35,22 +35,17 @@ class InvoiceDetailsController extends Controller
      */
     public function store(Request $request)
     {
-        // Validamos los datos del formulario
+        // Validación de datos
         $request->validate([
-            'OrderID' => 'required|integer',
+            'OrdenID' => 'required|integer',
             'PlatoID' => 'required|integer',
             'Cantidad' => 'required|integer',
             'PrecioUnitario' => 'required|numeric',
-            // Agrega reglas de validación para otros campos si es necesario
         ]);
 
-            // Crear un nuevo detalle de factura
-        $invoiceDetail = new InvoiceDetail();
-        $invoiceDetail->OrderID = $request->input('OrderID');
-        $invoiceDetail->PlatoID = $request->input('PlatoID');
-        $invoiceDetail->Cantidad = $request->input('Cantidad');
-        $invoiceDetail->PrecioUnitario = $request->input('PrecioUnitario');
-        
+       
+       
+        InvoiceDetail::create($request->all());
 
     
 
