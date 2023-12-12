@@ -2,36 +2,33 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use App\Models\invoiceDetail;
 use App\Models\order;
 use App\Models\dishes;
-use Database\Factory\invoiceDetailFactory;
+use Database\Factories\InvoiceDetailFactory;
 
-class invoiceDetailSeeder extends Seeder
+class InvoiceDetailSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
+        // Crear un detalle de factura utilizando datos reales
         $order = order::inRandomOrder()->first();
         $dishes = dishes::inRandomOrder()->first();
-        
-        $invoiceDetail = [
-            [
-                'OrdenID' => $order->id,
-                'PlatoID' => $dishes->id,
-                'Cantidad' => 34,
-                'PrecioUnitario' => 23.9
-            ]
+
+        $invoiceDetailData = [
+            'OrdenID' => $order->id,
+            'PlatoID' => $dishes->id,
+            'Cantidad' => 34,
+            'PrecioUnitario' => 23.9,
         ];
 
-        foreach ($invoiceDetail as $item) {
-            invoiceDetail::create($item);
-        }
+        // Crear el detalle de la factura
+        \App\Models\InvoiceDetail::create($invoiceDetailData);
 
-        \Database\Factories\invoiceDetailFactory::new()->count(50)->create();
- }
+        // Utilizar factory para crear más detalles de facturas de forma aleatoria
+        InvoiceDetailFactory::new()->count(100)->create();
+    }
 }

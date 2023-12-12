@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 use Illuminate\Database\Seeder;
@@ -24,5 +25,7 @@ class DatabaseSeeder extends Seeder
         $this->call(orderSeeder::class);
         $this->call(dishSeeder::class);
         $this->call(invoiceDetailSeeder::class);
+        $this->call(MesaSeeder::class);
+
     }
 }

@@ -1,46 +1,49 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Editar Plato</title>
-</head>
-<body>
-    <h1>Editar Plato</h1>
+<!-- resources/views/edit-dish.blade.php -->
 
-    <form method="POST" action="{{ route('dish.update', $dish->id) }}" enctype="multipart/form-data">
-        @csrf
-        @method('PUT')
+@extends('layouts.app')
 
-        <div>
-            <label for="Nombre">Nombre:</label>
-            <input type="text" name="Nombre" id="Nombre" value="{{ $dish->Nombre }}" required>
-        </div>
+@section('title', 'Editar Plato')
 
-        <div>
-            <label for="Descripcion">Descripción:</label>
-            <textarea name="Descripcion" id="Descripcion" required>{{ $dish->Descripcion }}</textarea>
-        </div>
+@section('content')
+    <div style="max-width: 800px; margin: 0 auto;">
+        <h1 style="text-align: center; margin-bottom: 20px;">Editar Plato</h1>
 
-        <div>
-            <label for="Precio">Precio:</label>
-            <input type="number" name="Precio" id="Precio" step="0.01" value="{{ $dish->Precio }}" required>
-        </div>
+        <form method="POST" action="{{ route('dish.update', $dish->id) }}" enctype="multipart/form-data" style="background-color: #f9f9f9; padding: 20px; border: 1px solid #ccc; border-radius: 5px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
 
-        <div>
-            <label for="Activo">Estado activo:</label>
-            <select name="Activo" id="Activo">
-                <option value="1" {{ $dish->Activo ? 'selected' : '' }}>Activo</option>
-                <option value="0" {{ $dish->Activo ? '' : 'selected' }}>Inactivo</option>
-            </select>
-        </div>
+            @csrf
+            @method('PUT')
 
-        <div>
-            <label for="Imagen">Imagen:</label>
-            <input type="file" name="Imagen" accept="image/*">
-        </div>
+            <div style="margin-bottom: 15px;">
+                <label for="Nombre" style="display: block; margin-bottom: 5px;">Nombre:</label>
+                <input type="text" name="Nombre" id="Nombre" value="{{ $dish->Nombre }}" required style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
+            </div>
 
-        <button type="submit">Actualizar Plato</button>
-    </form>
+            <div style="margin-bottom: 15px;">
+                <label for="Descripcion" style="display: block; margin-bottom: 5px;">Descripción:</label>
+                <textarea name="Descripcion" id="Descripcion" required style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px;">{{ $dish->Descripcion }}</textarea>
+            </div>
 
-    <a href="{{ route('dish.index') }}">Volver a la Lista de Platos</a>
-</body>
-</html>
+            <div style="margin-bottom: 15px;">
+                <label for="Precio" style="display: block; margin-bottom: 5px;">Precio:</label>
+                <input type="number" name="Precio" id="Precio" step="0.01" value="{{ $dish->Precio }}" required style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
+            </div>
+
+            <div style="margin-bottom: 15px;">
+                <label for="Activo" style="display: block; margin-bottom: 5px;">Estado activo:</label>
+                <select name="Activo" id="Activo" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
+                    <option value="1" {{ $dish->Activo ? 'selected' : '' }}>Activo</option>
+                    <option value="0" {{ $dish->Activo ? '' : 'selected' }}>Inactivo</option>
+                </select>
+            </div>
+
+            <div style="margin-bottom: 15px;">
+                <label for="Imagen" style="display: block; margin-bottom: 5px;">Imagen:</label>
+                <input type="file" name="Imagen" accept="image/*" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px;">
+            </div>
+
+            <button type="submit" style="background-color: #3498db; color: #fff; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer;">Actualizar Plato</button>
+        </form>
+
+        <a href="{{ route('dish.index') }}" style="display: block; margin-top: 20px; text-decoration: none; color: #3498db;">Volver a la Lista de Platos</a>
+    </div>
+@endsection

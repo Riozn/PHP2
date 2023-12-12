@@ -1,93 +1,61 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Lista de Platos</title>
-    <style>
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-        th, td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: left;
-        }
-        tr:nth-child(even) {
-            background-color: #f2f2f2;
-        }
-        th {
-            background-color: #4CAF50;
-            color: white;
-        }
-      
-        .back-link {
-            display: inline-block;
-            margin-top: 10px;
-            text-decoration: none;
-            color: #3498db;
-            font-weight: bold;
-            border: 1px solid #3498db;
-            padding: 5px 10px;
-            border-radius: 4px;
-            transition: background-color 0.3s, color 0.3s;
-        }
+<!-- resources/views/list-dish.blade.php -->
 
-        .back-link:hover {
-            background-color: #3498db;
-            color: #fff;
-        }   
-    </style>
-</head>
-<body>
-    <h1>Lista de Platos</h1>
+@extends('layouts.app')
 
-    @if(session('success'))
-        <div class="alert alert-success">
-            {{ session('success') }}
-        </div>
-    @endif
+@section('title', 'Lista de Platos')
 
-    <a href="{{ route('dish.create') }}">Crear Nuevo Plato</a>
+@section('content')
+    <div style="max-width: 800px; margin: 0 auto;">
+        <h1 style="text-align: center; margin-bottom: 20px;">Lista de Platos</h1>
 
-    <table>
-        <thead>
-            <tr>
-                <th>Nombre</th>
-                <th>Descripción</th>
-                <th>Precio</th>
-                <th>Estado Activo</th>
-                <th>Imagen</th>
-                <th>Acciones</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach($dish as $dish)
-                <tr>
-                    <td>{{ $dish->Nombre }}</td>
-                    <td>{{ $dish->Descripcion }}</td>
-                    <td>{{ $dish->Precio }}</td>
-                    <td>{{ $dish->Activo ? 'Activo' : 'Inactivo' }}</td>
-                    <td>
-                        <img src="{{ $dish->getImageUrl() }}" alt="Imagen del plato" width="100">
-                    </td>
-                    <td>
-                        <a href="{{ route('dish.show', $dish->id) }}">Ver</a>
-                        <a href="{{ route('dish.edit', $dish->id) }}">Editar</a>
-                        <form method="POST" action="{{ route('dish.destroy', $dish->id) }}">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit">Eliminar</button>
-                        </form>
-                    </td>
+        @if(session('success'))
+            <div style="background-color: #d4edda; color: #155724; border: 1px solid #c3e6cb; border-radius: 4px; padding: 10px; margin-bottom: 15px;">
+                {{ session('success') }}
+            </div>
+        @endif
+
+        <a href="{{ route('dish.create') }}" style="display: block; margin-bottom: 10px; text-decoration: none; color: #3498db; font-weight: bold; border: 1px solid #3498db; padding: 8px 16px; border-radius: 4px; transition: background-color 0.3s, color 0.3s;">Crear Nuevo Plato</a>
+
+        <table style="width: 100%; border-collapse: collapse; margin-bottom: 20px;">
+            <thead>
+                <tr style="background-color: #4CAF50; color: white;">
+                    <th style="padding: 12px;">Nombre</th>
+                    <th style="padding: 12px;">Descripción</th>
+                    <th style="padding: 12px;">Precio</th>
+                    <th style="padding: 12px;">Estado Activo</th>
+                    <th style="padding: 12px;">Imagen</th>
+                    <th style="padding: 12px;">Acciones</th>
                 </tr>
-            @endforeach
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                @foreach($dish as $d)
+                    <tr>
+                        <td style="padding: 8px;">{{ $d->Nombre }}</td>
+                        <td style="padding: 8px;">{{ $d->Descripcion }}</td>
+                        <td style="padding: 8px;">{{ $d->Precio }}</td>
+                        <td style="padding: 8px;">{{ $d->Activo ? 'Activo' : 'Inactivo' }}</td>
+                        <td style="padding: 8px;">
+                            @if ($d->Imagen)
+                                <img src="{{ asset('images/' . $d->Imagen) }}" alt="{{ $d->Nombre }}" style="max-width: 100px;">
+                            @else
+                                No hay imagen
+                            @endif
+                        </td>
+                        <td style="padding: 8px;">
+                            <a href="{{ route('dish.show', $d->id) }}" style="background-color: green; color: white; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer;">Ver</a>
+                            <a href="{{ route('dish.edit', $d->id) }}" style="background-color: blue color: white; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer;">Editar</a>
+                             <form method="POST" action="{{ route('dish.destroy', $d->id) }}" style="display: inline-block;">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" style="background-color: #d9534f; color: white; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer; margin-right: 10px;">Eliminar</button>
+                            </form>
+                        </td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
 
-    <a class="back-link" href="{{ route('dish.index') }}">Volver a la Creación de Platos</a>
-    <a class="back-link" href="javascript:history.go(-1)">Volver Atrás</a>
-
-    
-
-</body>
-</html>
+        <a href="{{ route('dish.index') }}" style="display: inline-block; margin-top: 10px; text-decoration: none; color: #3498db; font-weight: bold; border: 1px solid #3498db; padding: 8px 16px; border-radius: 4px; transition: background-color 0.3s, color 0.3s;">Volver a la Creación de Platos</a>
+        <a href="javascript:history.go(-1)" style="display: inline-block; margin-top: 10px; margin-left: 10px; text-decoration: none; color: #3498db; font-weight: bold; border: 1px solid #3498db; padding: 8px 16px; border-radius: 4px; transition: background-color 0.3s, color 0.3s;">Volver Atrás</a>
+    </div>
+@endsection

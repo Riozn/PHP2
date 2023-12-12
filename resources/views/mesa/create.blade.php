@@ -1,77 +1,24 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Crear Nueva Mesa</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            background-color: #f5f5f5;
-        }
+@extends('layouts.app')
 
-        h1 {
-            color: #333;
-        }
+@section('title', 'Crear Nueva Mesa')
 
-        form {
-            max-width: 400px;
-            margin: 0 auto;
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-        }
+@section('content')
+    <div class="container">
+        <h1 style="text-align: center; margin-bottom: 20px;">Crear Nueva Mesa</h1>
 
-        label {
-            display: block;
-            margin-top: 10px;
-        }
+        <form method="POST" action="{{ route('mesa.store') }}" style="max-width: 400px; margin: 0 auto; background-color: #fff; padding: 20px; border: 1px solid #ccc; border-radius: 5px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);" class="my-4">
+            @csrf
+            <div class="form-group">
+                <label for="capacidad">Capacidad:</label>
+                <input type="number" name="capacidad" required style="width: 100%; padding: 10px; margin-bottom: 10px; border: 1px solid #ccc; border-radius: 4px;">
+            </div>
+            <div class="form-group">
+                <label for="ubicacion">Ubicación:</label>
+                <input type="text" name="ubicacion" required style="width: 100%; padding: 10px; margin-bottom: 10px; border: 1px solid #ccc; border-radius: 4px;">
+            </div>
+            <button type="submit" class="btn btn-success" style="background-color: #4CAF50; color: #fff; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer;">Guardar Mesa</button>
+        </form>
 
-        input[type="number"],
-        input[type="text"] {
-            width: 100%;
-            padding: 10px;
-            margin-top: 5px;
-            border: 1px solid #ccc;
-            border-radius: 3px;
-        }
-
-        button {
-            display: inline-block;
-            background-color: #007BFF;
-            color: #fff;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 3px;
-            cursor: pointer;
-        }
-
-        a {
-            display: block;
-            margin-top: 10px;
-            text-decoration: none;
-            color: #007BFF;
-        }
-
-        button:hover {
-            background-color: #0056b3;
-        }
-    </style>
-</head>
-<body>
-    <h1>Crear Nueva Mesa</h1>
-
-    <form method="POST" action="{{ route('mesa.store') }}">
-        @csrf
-        <label for="capacidad">Capacidad:</label>
-        <input type="number" name="capacidad" required>
-
-        <label for="ubicacion">Ubicación:</label>
-        <input type="text" name="ubicacion" required>
-
-        <button type="submit">Guardar Mesa</button>
-    </form>
-
-    <a href="{{ route('mesa.index') }}">Volver al Listado</a>
-</body>
-</html>
+        <a href="{{ route('mesa.index') }}" class="btn btn-primary" style="display: block; text-decoration: none; color: #3498db; font-weight: bold; border: 1px solid #3498db; padding: 8px 16px; border-radius: 4px; transition: background-color 0.3s, color 0.3s; margin-top: 10px;">Volver al Listado</a>
+    </div>
+@endsection

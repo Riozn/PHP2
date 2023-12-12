@@ -1,8 +1,8 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <title>Detalles de Reservación</title>
+@extends('layouts.app')
+
+@section('title', 'Detalles de Reservación')
+
+@section('content')
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -43,8 +43,7 @@
             background-color: #007bff;
         }
     </style>
-</head>
-<body>
+
     <header>
         <h1>Detalles de Reservación</h1>
     </header>
@@ -64,5 +63,4 @@
             <a href="{{ route('reservation.index') }}" class="btn btn-primary">Volver a la lista</a>
         </div>
     </div>
-</body>
-</html>
+@endsection

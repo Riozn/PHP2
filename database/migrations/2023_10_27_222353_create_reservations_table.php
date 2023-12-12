@@ -13,14 +13,16 @@ return new class extends Migration
     {
         Schema::create('reservations', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('customers_id')->default(1);
+            $table->unsignedBigInteger('customers_id')->nullable(); // Permitir valores nulos
             $table->date('FechaReserva');
             $table->bigInteger('NumeroPersonas');
-            $table->unsignedBigInteger('mesa_id');
+            $table->unsignedBigInteger('mesa_id')->nullable(); // Permitir valores nulos
             $table->boolean('Activo')->default(true);
             $table->timestamps();
-            $table->foreign('customers_id')->references('id')->on('customers');
-            $table->foreign('mesa_id')->references('id')->on('mesas');
+        
+            // Definición de claves foráneas
+            $table->foreign('customers_id')->references('id')->on('customers')->onDelete('set null');
+            $table->foreign('mesa_id')->references('id')->on('mesas')->onDelete('set null');
         });
     }
 

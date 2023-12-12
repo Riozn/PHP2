@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Mesa extends Model
 {
+    use HasFactory;
     protected $table = 'mesas';
 
     protected $fillable = ['capacidad', 'ubicacion'];
